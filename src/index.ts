@@ -9,7 +9,7 @@ const subsetMap: SubsetMap = {
   'background': []
 };
 
-export const ruleName = 'design-system/config';
+export const ruleName = 'subsetcss/config';
 export const messages =  stylelint.utils.ruleMessages(ruleName, {
   invalid(prop, actual, subset, pieceProp) {
     let thing = pieceProp ? `The ${pieceProp}` : 'It';
