@@ -12,6 +12,7 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test",
+    "prerelease": "yarn build",
     "release": "standard-version"
   },
   "peerDependencies": {
