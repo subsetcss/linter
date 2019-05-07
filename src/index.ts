@@ -1,5 +1,6 @@
 'use strict';
 
+import path from 'path';
 import stylelint from 'stylelint';
 import valueParser from 'postcss-value-parser';
 
@@ -18,7 +19,7 @@ export const messages =  stylelint.utils.ruleMessages(ruleName, {
 });
 
 export default stylelint.createPlugin(ruleName, function(configPath) {
-  const config = require(configPath);
+  const config = require(path.join(process.cwd(), configPath));
 
   return function(postcssRoot, postcssResult) {
     let validOptions = stylelint.utils.validateOptions(postcssResult, ruleName);
@@ -56,7 +57,7 @@ export default stylelint.createPlugin(ruleName, function(configPath) {
         return;
       }
 
-      checkAgainstSubset(decl, subset, postcssResult);
+      checkAgainstSubset(decl, { prop: decl.prop, value: decl.value }, subset, postcssResult);
     });
 
     postcssRoot.walkAtRules(rule => {
@@ -76,12 +77,8 @@ export default stylelint.createPlugin(ruleName, function(configPath) {
           if (words.length === 2) {
             let [prop, value] = words;
             let subset = atConfig.params[prop];
-            let decl = {
-              prop,
-              value,
-              ...rule
-            };
-            checkValueAgainstSubset(decl, value, subset, postcssResult);
+
+            checkValueAgainstSubset(rule, { prop, value }, value, subset, postcssResult);
           }
         }
 
@@ -113,7 +110,7 @@ export default stylelint.createPlugin(ruleName, function(configPath) {
             return;
           }
 
-          checkAgainstSubset(decl, subset, postcssResult);
+          checkAgainstSubset(decl, { prop: decl.prop, value: decl.value }, subset, postcssResult);
         });
       }
     });
@@ -121,11 +118,11 @@ export default stylelint.createPlugin(ruleName, function(configPath) {
   }
 });
 
-function checkAgainstSubset(decl, subset, postcssResult) {
-  return checkValueAgainstSubset(decl, decl.value, subset, postcssResult);
+function checkAgainstSubset(decl, message, subset, postcssResult) {
+  return checkValueAgainstSubset(decl, message, decl.value, subset, postcssResult);
 }
 
-function checkValueAgainstSubset(decl, value, subset, postcssResult, altProp?: string) {
+function checkValueAgainstSubset(decl, message, value, subset, postcssResult, altProp?: string) {
   if (Array.isArray(subset)) {
     let valueNotInSubset = !subset.includes(value);
     if (valueNotInSubset) {
@@ -133,7 +130,7 @@ function checkValueAgainstSubset(decl, value, subset, postcssResult, altProp?: s
         ruleName: ruleName,
         result: postcssResult,
         node: decl,
-        message: messages.invalid(decl.prop, decl.value, subset, altProp)
+        message: messages.invalid(message.prop, message.value, subset, altProp)
       });
     }
   }
