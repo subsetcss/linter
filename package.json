@@ -11,9 +11,12 @@
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
-    "test": "tsdx test"
+    "test": "tsdx test",
+    "release": "standard-version"
   },
-  "peerDependencies": {},
+  "peerDependencies": {
+    "stylelint": "^10.0.0"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged"
@@ -30,13 +33,14 @@
     "husky": "^2.2.0",
     "prettier": "^1.17.0",
     "pretty-quick": "^1.10.0",
+    "standard-version": "^6.0.1",
     "tsdx": "^0.5.7",
     "tslib": "^1.9.3",
-    "typescript": "^3.4.5"
+    "typescript": "^3.4.5",
+    "stylelint": "^10.0.1"
   },
   "dependencies": {
     "@types/stylelint": "^9.10.0",
-    "postcss-value-parser": "^3.3.1",
-    "stylelint": "^10.0.1"
+    "postcss-value-parser": "^3.3.1"
   }
 }
