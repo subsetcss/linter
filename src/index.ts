@@ -25,7 +25,7 @@ export default stylelint.createPlugin(ruleName, function(configPath) {
     if (!validOptions) {
       return;
     };
-    let processed = [];
+    let processed: any[] = [];
 
     postcssRoot.walkDecls(decl => {
       let subset = config.subsets[decl.prop];
