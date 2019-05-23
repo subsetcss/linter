@@ -4,6 +4,8 @@ Linting your CSS to limit yourself to a defined subset of values.
 
 Note: in development
 
+![Example Output](./example.png "Example")
+
 ## Install
 
 ```sh
