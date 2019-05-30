@@ -2,6 +2,9 @@
 
 Linting your CSS to limit yourself to a defined subset of values.
 
+CSS can get unweildy sometimes, as you keep adding new features and new people join the team. It's hard to be consistent,
+and that's why utility/functional CSS libraries like Tailwind are growing in popularity. SubsetCSS helps aleviate this problem by enforcing your CSS to a predefined amount of values, keeping everyone on the same page as a project evolves.
+
 Note: in development
 
 ![Example Output](./example.png "Example")
