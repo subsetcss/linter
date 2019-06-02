@@ -41,10 +41,10 @@ module.exports = {
       '1rem',       // 16px
       '1.125rem',   // 18px
       '1.25rem',    // 20px
-      '21.5rem',    // 24px
-      '31.875rem',  // 30px
-      '42.25rem',   // 36px
-      '53rem',      // 48px
+      '1.5rem',     // 24px
+      '1.875rem',   // 30px
+      '2.25rem',    // 36px
+      '3rem',       // 48px
     ],
     'border-width': [
       '0',
@@ -70,8 +70,8 @@ module.exports = {
           '1rem',       // 16px
           '1.125rem',   // 18px
           '1.25rem',    // 20px
-          '21.5rem',    // 24px
-          '31.875rem'   // 30px
+          '1.5rem',     // 24px
+          '1.875rem'    // 30px
         ]
       }
     }
