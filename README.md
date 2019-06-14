@@ -84,6 +84,13 @@ module.exports = {
 You can run with `yarn stylelint "src/styles/*.css"`. Feel free to add to your npm scripts
 or setup with any intermediate tools.
 
+## Tips
+
+### Using variables in your subsets
+
+- css variables: `'font-color': ['var(--text-color, black)']`
+- sass variables: `'font-color': ['$text-color']`
+- less variables: `'font-color': ['@text-color']`
 
 ## Contributing
 
