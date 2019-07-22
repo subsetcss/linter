@@ -7,6 +7,7 @@ import valueParser from 'postcss-value-parser';
 const subsetMap: SubsetMap = {
   'border': ['border-width', 'border-style', 'border-color'],
   'margin': ['margin-top', 'margin-right', 'margin-bottom', 'margin-left'],
+  'padding': ['padding-top', 'padding-right', 'padding-bottom', 'padding-left'],
   'background': []
 };
 
