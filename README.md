@@ -92,6 +92,24 @@ or setup with any intermediate tools.
 - sass variables: `'font-color': ['$text-color']`
 - less variables: `'font-color': ['@text-color']`
 
+### Generate a modular scale
+
+Use https://polished.js.org/docs/#modularscale or something similar.
+
+```js
+"font-size": Array.from({ length: 5 }, (_v, index) => polished.modularScale(index)),
+```
+
+### Generate custom color combinations
+
+Use https://github.com/TypeCtrl/tinycolor#color-combinations or something similar.
+
+```js
+const colors = new TinyColor('#f00').polyad(4);
+// later
+"color": colors.map(t => t.toHexString())
+```
+
 ## Contributing
 
 See the [Contributing](./CONTRIBUTING.md) guide.
