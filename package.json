@@ -1,6 +1,6 @@
 {
   "name": "subsetcss",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Linting your CSS to limit yourself to a defined subset of values.",
   "repository": "https://github.com/knownasilya/subsetcss",
   "keywords": [
