@@ -7,7 +7,7 @@ and that's why utility/functional CSS libraries like Tailwind are growing in pop
 
 Note: in development
 
-![Example Output](./example.png "Example")
+![Example Output](./example.png 'Example')
 
 ## Install
 
@@ -21,9 +21,7 @@ Add a `.stylelintrc` file with the following config:
 
 ```json
 {
-  "plugins": [
-    "subsetcss"
-  ],
+  "plugins": ["subsetcss"],
   "rules": {
     "subsetcss/config": "./.subsetcss.js"
   }
@@ -34,48 +32,45 @@ Create a `.subsetcss.js` file with content like:
 
 ```js
 module.exports = {
-  'subsets': {
+  subsets: {
     'font-size': [
-      '.75rem',     // 12px
-      '.875rem',    // 14px
-      '1rem',       // 16px
-      '1.125rem',   // 18px
-      '1.25rem',    // 20px
-      '1.5rem',     // 24px
-      '1.875rem',   // 30px
-      '2.25rem',    // 36px
-      '3rem',       // 48px
+      '.75rem', // 12px
+      '.875rem', // 14px
+      '1rem', // 16px
+      '1.125rem', // 18px
+      '1.25rem', // 20px
+      '1.5rem', // 24px
+      '1.875rem', // 30px
+      '2.25rem', // 36px
+      '3rem', // 48px
     ],
-    'border-width': [
-      '0',
-      '1px',
-      '2px',
-      '3px'
-    ],
+    'border-width': ['0', '1px', '2px', '3px'],
     'border-color': [
       'transparent',
       '#22292f',
       '#3d4852',
       '#606f7b',
       '#8795a1',
-      '#b8c2cc'
+      '#b8c2cc',
     ],
     'border-style': ['solid'],
-    '@media': {
-      'params': {
+  },
+  '@media': [
+    {
+      params: {
         'max-width': ['400px', '768px'],
       },
-      'subsets': {
-         'font-size': [
-          '1rem',       // 16px
-          '1.125rem',   // 18px
-          '1.25rem',    // 20px
-          '1.5rem',     // 24px
-          '1.875rem'    // 30px
-        ]
-      }
-    }
-  }
+      subsets: {
+        'font-size': [
+          '1rem', // 16px
+          '1.125rem', // 18px
+          '1.25rem', // 20px
+          '1.5rem', // 24px
+          '1.875rem', // 30px
+        ],
+      },
+    },
+  ],
 };
 ```
 
@@ -97,7 +92,7 @@ or setup with any intermediate tools.
 Use https://polished.js.org/docs/#modularscale or something similar.
 
 ```js
-"font-size": Array.from({ length: 5 }, (_v, index) => polished.modularScale(index)),
+'font-size': Array.from({ length: 5 }, (_v, index) => polished.modularScale(index)),
 ```
 
 ### Generate custom color combinations
@@ -107,7 +102,7 @@ Use https://github.com/TypeCtrl/tinycolor#color-combinations or something simila
 ```js
 const colors = new TinyColor('#f00').polyad(4);
 // later
-"color": colors.map(t => t.toHexString())
+'color': colors.map(t => t.toHexString())
 ```
 
 ## Contributing

@@ -52,6 +52,7 @@
   },
   "dependencies": {
     "@types/stylelint": "^9.10.0",
+    "@subsetcss/parser": "^0.0.6",
     "postcss-value-parser": "^3.3.1"
   }
 }
