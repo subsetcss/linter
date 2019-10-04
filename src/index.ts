@@ -69,61 +69,6 @@ export default stylelint.createPlugin(ruleName, function(configPath) {
         postcssResult
       );
     });
-
-    // postcssRoot.walkAtRules(rule => {
-    //   if (rule.type === 'atrule') {
-    //     let name = `@${rule.name}`;
-    //     let atConfig = config.subsets[name];
-    //     let { nodes } = valueParser(rule.params);
-
-    //     if (nodes.length) {
-    //       let words: string[] = [];
-    //       nodes[0].nodes.forEach((node: ValueParserNode) => {
-    //         if (node.type === 'word') {
-    //           words.push(node.value);
-    //         }
-    //       });
-
-    //       if (words.length === 2) {
-    //         let [prop, value] = words;
-    //         let subset = atConfig.params[prop];
-
-    //         checkValueAgainstSubset(rule, { prop, value }, value, subset, postcssResult);
-    //       }
-    //     }
-
-    //     rule.walkDecls(decl => {
-    //       let subset = atConfig.subsets[decl.prop] || config.subsets[decl.prop];
-
-    //       // Try alternates, maybe this rule is made up of multiple rules, like `border`.
-    //       if (!subset) {
-    //         let alternates = subsetMap[decl.prop];
-
-    //         if (alternates) {
-    //           let parsed = valueParser(decl.value);
-    //           let values: string[] = [];
-
-    //           parsed.walk((item: ValueParserNode) => {
-    //             if (item.type === 'word') {
-    //               values.push(item.value);
-    //             }
-    //           });
-
-    //           alternates.forEach((alt, index) => {
-    //             let subset = config.subsets[alt];
-    //             let value = values[index];
-
-    //             checkValueAgainstSubset(decl, value, subset, postcssResult, alt);
-    //           });
-    //         }
-
-    //         return;
-    //       }
-
-    //       checkAgainstSubset(decl, { prop: decl.prop, value: decl.value }, subset, postcssResult);
-    //     });
-    //   }
-    // });
   };
 });
 
@@ -145,6 +90,9 @@ function checkValueAgainstSubset(
   postcssResult,
   altProp?: string
 ) {
+  if (typeof subset === 'function') {
+    subset = subset();
+  }
   if (Array.isArray(subset)) {
     let valueNotInSubset = !subset.includes(value);
     if (valueNotInSubset) {
