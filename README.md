@@ -57,7 +57,9 @@ module.exports = {
   },
   '@media': [
     {
+      type: 'print', // optional
       params: {
+        // optional
         'max-width': ['400px', '768px'],
       },
       subsets: {
