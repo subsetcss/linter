@@ -44,7 +44,7 @@ module.exports = {
       '2.25rem', // 36px
       '3rem', // 48px
     ],
-    'border-width': () => ['0', '1px', '2px', '3px'],
+    'border-width': (key, value) => ['0', '1px', '2px', '3px'],
     'border-color': [
       'transparent',
       '#22292f',

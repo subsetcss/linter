@@ -91,7 +91,7 @@ function checkValueAgainstSubset(
   altProp?: string
 ) {
   if (typeof subset === 'function') {
-    subset = subset();
+    subset = subset(message.prop, message.value);
   }
   if (Array.isArray(subset)) {
     let valueNotInSubset = !subset.includes(value);
