@@ -51,7 +51,7 @@
     "typescript": "^3.4.5"
   },
   "dependencies": {
-    "@subsetcss/parser": "^0.0.7",
+    "@subsetcss/parser": "^0.0.8",
     "@types/stylelint": "^9.10.0",
     "postcss-value-parser": "^3.3.1"
   }
