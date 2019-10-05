@@ -44,7 +44,7 @@ module.exports = {
       '2.25rem', // 36px
       '3rem', // 48px
     ],
-    'border-width': ['0', '1px', '2px', '3px'],
+    'border-width': () => ['0', '1px', '2px', '3px'],
     'border-color': [
       'transparent',
       '#22292f',
@@ -57,9 +57,10 @@ module.exports = {
   },
   '@media': [
     {
-      type: 'print', // optional
+      // optional
+      type: 'print',
+      // optional
       params: {
-        // optional
         'max-width': ['400px', '768px'],
       },
       subsets: {
