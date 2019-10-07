@@ -108,6 +108,10 @@ const colors = new TinyColor('#f00').polyad(4);
 'color': colors.map(t => t.toHexString())
 ```
 
+## Helper Functions
+
+Have a look at https://github.com/subsetcss/config-helpers for official helper functions to help build out your config.
+
 ## Contributing
 
 See the [Contributing](./CONTRIBUTING.md) guide.
