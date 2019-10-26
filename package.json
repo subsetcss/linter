@@ -40,18 +40,18 @@
     "trailingComma": "es5"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.12",
+    "@types/jest": "^24.0.20",
     "husky": "^3.0.8",
     "prettier": "^1.17.0",
     "pretty-quick": "^1.10.0",
     "standard-version": "^7.0.0",
     "stylelint": "^11.0.0",
-    "tsdx": "^0.9.3",
-    "tslib": "^1.9.3",
-    "typescript": "^3.4.5"
+    "tsdx": "^0.10.5",
+    "tslib": "^1.10.0",
+    "typescript": "^3.6.4"
   },
   "dependencies": {
-    "@subsetcss/parser": "^0.0.8",
+    "@subsetcss/parser": "^0.0.9",
     "@types/stylelint": "^9.10.0",
     "postcss-value-parser": "^3.3.1"
   }

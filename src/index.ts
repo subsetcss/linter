@@ -3,7 +3,13 @@
 import path from 'path';
 import stylelint from 'stylelint';
 import valueParser from 'postcss-value-parser';
-import { getSubsetConfig, Subsets } from '@subsetcss/parser';
+import {
+  getSubsetConfig,
+  Subsets,
+  SubsetFunc,
+  mapSubset,
+} from '@subsetcss/parser';
+import postcss from 'postcss';
 
 const subsetMap: Subsets = {
   border: ['border-width', 'border-style', 'border-color'],
@@ -22,20 +28,24 @@ export const messages = stylelint.utils.ruleMessages(ruleName, {
   },
 });
 
-export default stylelint.createPlugin(ruleName, function(configPath) {
-  const config = require(path.join(process.cwd(), configPath));
+export default stylelint.createPlugin(ruleName, function(
+  configPath,
+  configObject
+) {
+  const config = configObject
+    ? configObject
+    : require(path.join(process.cwd(), configPath));
 
   return function(postcssRoot, postcssResult) {
     let validOptions = stylelint.utils.validateOptions(postcssResult, ruleName);
     if (!validOptions) {
       return;
     }
-    let processed: any[] = [];
 
     postcssRoot.walkDecls(decl => {
+      debugger;
       let rootConfig = getSubsetConfig(config, decl);
       let subset = rootConfig ? rootConfig.subsets[decl.prop] : undefined;
-      processed.push(decl);
 
       // Try alternates, maybe this rule is made up of multiple rules, like `border`.
       if (!subset) {
@@ -51,7 +61,7 @@ export default stylelint.createPlugin(ruleName, function(configPath) {
             }
           });
 
-          alternates.forEach((alt, index) => {
+          mapSubset(alternates, decl.prop, decl.value).forEach((alt, index) => {
             let subset = config.subsets[alt];
             let value = values[index];
 
@@ -72,7 +82,12 @@ export default stylelint.createPlugin(ruleName, function(configPath) {
   };
 });
 
-function checkAgainstSubset(decl, message, subset, postcssResult) {
+function checkAgainstSubset(
+  decl: postcss.Declaration,
+  message,
+  subset: string[] | SubsetFunc,
+  postcssResult: postcss.Result
+) {
   return checkValueAgainstSubset(
     decl,
     message,
@@ -94,6 +109,8 @@ function checkValueAgainstSubset(
     subset = subset(message.prop, message.value);
   }
   if (Array.isArray(subset)) {
+    // let parsed = valueParser(value);
+    // debugger;
     let valueNotInSubset = !subset.includes(value);
     if (valueNotInSubset) {
       stylelint.utils.report({
@@ -103,6 +120,10 @@ function checkValueAgainstSubset(
         message: messages.invalid(message.prop, message.value, subset, altProp),
       });
     }
+  } else {
+    throw new Error(
+      `The subset value for ${message.prop} should be an array or a function that returns an array`
+    );
   }
 }
 
