@@ -23,7 +23,17 @@ Add a `.stylelintrc` file with the following config:
 {
   "plugins": ["subsetcss"],
   "rules": {
-    "subsetcss/config": "./.subsetcss.js"
+    "subsetcss/config": "./.subsetcss.js",
+    // Alternate config mode
+    "subsetcss/config": [
+      true,
+      {
+        // inlined config, or required manually if using `stylelint.config.js` file.
+        "subsets": {
+          /* .. */
+        }
+      }
+    ]
   }
 }
 ```
