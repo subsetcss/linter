@@ -43,7 +43,6 @@ export default stylelint.createPlugin(ruleName, function(
     }
 
     postcssRoot.walkDecls(decl => {
-      debugger;
       let rootConfig = getSubsetConfig(config, decl);
       let subset = rootConfig ? rootConfig.subsets[decl.prop] : undefined;
 
@@ -109,9 +108,18 @@ function checkValueAgainstSubset(
     subset = subset(message.prop, message.value);
   }
   if (Array.isArray(subset)) {
-    // let parsed = valueParser(value);
+    let parsed = valueParser(value);
+    let words = parsed.nodes.filter(
+      (node: ValueParserNode) => node.type === 'word'
+    );
+    debugger;
+    console.log(words);
+
+    let valueNotInSubset = words.some((node: ValueParserNode) => {
+      return !subset.includes(node.value);
+    });
     // debugger;
-    let valueNotInSubset = !subset.includes(value);
+    // let valueNotInSubset = !subset.includes(value);
     if (valueNotInSubset) {
       stylelint.utils.report({
         ruleName: ruleName,
