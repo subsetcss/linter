@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.6](https://github.com/knownasilya/subsetcss/compare/v0.2.5...v0.2.6) (2019-10-29)
+
+### Features
+
+- alternate inline config ([453158b](https://github.com/knownasilya/subsetcss/commit/453158b))
+- support multi value props ([491efde](https://github.com/knownasilya/subsetcss/commit/491efde))
+
 ### [0.2.5](https://github.com/knownasilya/subsetcss/compare/v0.2.4...v0.2.5) (2019-10-05)
 
 ### Features
