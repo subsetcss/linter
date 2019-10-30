@@ -17,25 +17,17 @@ yarn add -D subsetcss stylelint
 
 ## Setup
 
-Add a `.stylelintrc` file with the following config:
+Add a `stylelint.config.js` file with the following config:
 
-```json
-{
-  "plugins": ["subsetcss"],
-  "rules": {
-    "subsetcss/config": "./.subsetcss.js",
-    // Alternate config mode
-    "subsetcss/config": [
-      true,
-      {
-        // inlined config, or required manually if using `stylelint.config.js` file.
-        "subsets": {
-          /* .. */
-        }
-      }
-    ]
-  }
-}
+```js
+let config = require('./.subsetcss');
+
+module.exports = {
+  plugins: ['subsetcss'],
+  rules: {
+    'subsetcss/config': [true, config],
+  },
+};
 ```
 
 Create a `.subsetcss.js` file with content like:
