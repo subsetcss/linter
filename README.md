@@ -79,6 +79,8 @@ module.exports = {
 };
 ```
 
+> Here's an example config based on TailwindCSS styles https://gist.github.com/knownasilya/0ceb5fe6c02d558f2e908516dc1551bd
+
 ## Run
 
 You can run with `yarn stylelint "src/styles/*.css"`. Feel free to add to your npm scripts
