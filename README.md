@@ -102,6 +102,11 @@ Use https://polished.js.org/docs/#modularscale or something similar.
 'font-size': Array.from({ length: 5 }, (_v, index) => polished.modularScale(index)),
 ```
 
+First value is the step, second the starting value (defaults to `'1em'`) and third is the modular scale, which can
+be one of the values defined here: https://polished.js.org/docs/#modularscaleratio
+
+You can preview modular scales here: https://www.modularscale.com/
+
 ### Generate custom color combinations
 
 Use https://github.com/TypeCtrl/tinycolor#color-combinations or something similar.
