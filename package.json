@@ -44,7 +44,7 @@
     "husky": "^3.0.8",
     "prettier": "^1.17.0",
     "pretty-quick": "^1.10.0",
-    "standard-version": "^7.0.0",
+    "standard-version": "^8.0.1",
     "stylelint": "^11.0.0",
     "tsdx": "^0.10.5",
     "tslib": "^1.10.0",
