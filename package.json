@@ -11,10 +11,8 @@
     "styleguide",
     "styles"
   ],
-  "main": "dist/index.js",
-  "umd:main": "dist/subsetcss.umd.production.js",
-  "module": "dist/subsetcss.es.production.js",
-  "typings": "dist/index.d.ts",
+  "main": "build/src/index.js",
+  "typings": "build/src/index.d.ts",
   "files": [
     "build"
   ],
