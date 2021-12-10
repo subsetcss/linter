@@ -110,7 +110,7 @@ function checkValueAgainstSubset(
       (node: ValueParserNode) => node.type === 'word'
     );
     
-    console.log(words);
+    // console.log(words);
 
     const valueNotInSubset = words.some((node: ValueParserNode) => {
       return !subset.includes(node.value);

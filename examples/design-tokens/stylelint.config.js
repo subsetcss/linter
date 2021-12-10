@@ -19,14 +19,17 @@ const designTokens = {
   },
 };
 
-function tokens(keys) {
-  return keys.filter(key => designTokens[key]).map(key => `var(${key})`);
+function tokens(keys, { prefix } = {}) {
+  const pre = prefix || '';
+  return keys
+    .filter(key => designTokens[pre + key])
+    .map(key => `var(${pre}${key})`);
 }
 
 let config = {
   subsets: {
     'font-size': ['0.25em', '0.5em', '0.75em', '1em'],
-    color: tokens(['--gray-0', '--gray-1']),
+    color: tokens(['gray-0', 'gray-1'], { prefix: '--' }),
   },
 };
 
