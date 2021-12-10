@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.7](https://github.com/knownasilya/subsetcss/compare/v0.2.6...v0.2.7) (2021-12-10)
+
+
+### Features
+
+* update to postcss 8 and stylelint 14, remove tsdx ([eefbac1](https://github.com/knownasilya/subsetcss/commit/eefbac1cfd88a4232590a75d0d6a6e80522854f9))
+
 ### [0.2.6](https://github.com/knownasilya/subsetcss/compare/v0.2.5...v0.2.6) (2019-10-29)
 
 ### Features
