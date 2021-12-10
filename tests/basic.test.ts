@@ -1,16 +1,16 @@
-import stylelint, { LinterOptions, Warning, LinterResult } from 'stylelint';
+import * as stylelint from 'stylelint';
 import { ruleName } from '../src';
 import { SubsetConfig } from '@subsetcss/parser';
 
 function getOptions(
   code: string,
   config: SubsetConfig
-): Partial<LinterOptions> {
+): Partial<stylelint.LinterOptions> {
   return {
     code,
     configBasedir: __dirname,
     config: {
-      plugins: ['../dist'],
+      plugins: ['../build/src'],
       rules: {
         [ruleName]: [true, config],
       },
@@ -18,9 +18,9 @@ function getOptions(
   };
 }
 
-function getWarnings(result: LinterResult): Warning[] {
-  let output = JSON.parse(result.output)[0];
-  let warnings = output.warnings as Warning[];
+function getWarnings(result: stylelint.LinterResult): stylelint.Warning[] {
+  const output = JSON.parse(result.output)[0];
+  const warnings = output.warnings as stylelint.Warning[];
   return warnings;
 }
 
@@ -50,10 +50,10 @@ describe('basic', () => {
       },
     };
 
-    let result: LinterResult = await stylelint.lint(getOptions(code, config));
+    const result: stylelint.LinterResult = await stylelint.lint(getOptions(code, config));
 
     expect(result.errored).toBe(true);
-    let warnings = getWarnings(result);
+    const warnings = getWarnings(result);
     expect(warnings[0].text).toBe(
       'Invalid `font-size: 12px`. It should use one of the following values: 0.25em, 0.5em, 0.75em, 1em. (subsetcss/config)'
     );
@@ -66,7 +66,7 @@ describe('basic', () => {
         margin: ['0.25em', '0.5em', '0.75em', '1em'],
       },
     };
-    let result: LinterResult = await stylelint.lint(getOptions(code, config));
+    const result: stylelint.LinterResult = await stylelint.lint(getOptions(code, config));
 
     expect(result.errored).toBe(false);
   });
@@ -78,10 +78,10 @@ describe('basic', () => {
         margin: ['0.25em', '0.5em', '0.75em', '1em'],
       },
     };
-    let result: LinterResult = await stylelint.lint(getOptions(code, config));
+    const result: stylelint.LinterResult = await stylelint.lint(getOptions(code, config));
 
     expect(result.errored).toBe(true);
-    let warnings = getWarnings(result);
+    const warnings = getWarnings(result);
     expect(warnings[0].text).toBe(
       'Invalid `margin: 1em 12px`. It should use one of the following values: 0.25em, 0.5em, 0.75em, 1em. (subsetcss/config)'
     );

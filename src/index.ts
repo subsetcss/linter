@@ -1,27 +1,24 @@
 'use strict';
 
 import path from 'path';
-import stylelint from 'stylelint';
-import valueParser from 'postcss-value-parser';
+import * as stylelint from 'stylelint';
+import * as valueParser from 'postcss-value-parser';
 import {
   getSubsetConfig,
-  Subsets,
   SubsetFunc,
   mapSubset,
+  shorthandMap,
 } from '@subsetcss/parser';
-import postcss from 'postcss';
+import type * as postcss from 'postcss';
 
-const subsetMap: Subsets = {
-  border: ['border-width', 'border-style', 'border-color'],
-  margin: ['margin-top', 'margin-right', 'margin-bottom', 'margin-left'],
-  padding: ['padding-top', 'padding-right', 'padding-bottom', 'padding-left'],
-  background: [],
-};
+
+const subsetMap = shorthandMap;
 
 export const ruleName = 'subsetcss/config';
+
 export const messages = stylelint.utils.ruleMessages(ruleName, {
   invalid(prop, actual, subset, pieceProp) {
-    let thing = pieceProp ? `The ${pieceProp}` : 'It';
+    const thing = pieceProp ? `The ${pieceProp}` : 'It';
     return `Invalid \`${prop}: ${actual}\`. ${thing} should use one of the following values: ${subset.join(
       ', '
     )}.`;
@@ -37,22 +34,22 @@ export default stylelint.createPlugin(ruleName, function(
     : require(path.join(process.cwd(), configPath));
 
   return function(postcssRoot, postcssResult) {
-    let validOptions = stylelint.utils.validateOptions(postcssResult, ruleName);
+    const validOptions = stylelint.utils.validateOptions(postcssResult, ruleName);
     if (!validOptions) {
       return;
     }
 
     postcssRoot.walkDecls(decl => {
-      let rootConfig = getSubsetConfig(config, decl);
-      let subset = rootConfig ? rootConfig.subsets[decl.prop] : undefined;
+      const rootConfig = getSubsetConfig(config, decl);
+      const subset = rootConfig ? rootConfig.subsets[decl.prop] : undefined;
 
       // Try alternates, maybe this rule is made up of multiple rules, like `border`.
       if (!subset) {
-        let alternates = subsetMap[decl.prop];
+        const alternates = subsetMap[decl.prop];
 
         if (alternates) {
-          let parsed = valueParser(decl.value);
-          let values: string[] = [];
+          const parsed = valueParser(decl.value);
+          const values: string[] = [];
 
           parsed.walk((item: ValueParserNode) => {
             if (item.type === 'word') {
@@ -61,10 +58,10 @@ export default stylelint.createPlugin(ruleName, function(
           });
 
           mapSubset(alternates, decl.prop, decl.value).forEach((alt, index) => {
-            let subset = config.subsets[alt];
-            let value = values[index];
+            const subset = config.subsets[alt];
+            const value = values[index];
 
-            checkValueAgainstSubset(decl, value, subset, postcssResult, alt);
+            checkValueAgainstSubset(decl, { prop: decl.prop, value: decl.value }, value, subset, postcssResult, alt);
           });
         }
 
@@ -85,7 +82,7 @@ function checkAgainstSubset(
   decl: postcss.Declaration,
   message,
   subset: string[] | SubsetFunc,
-  postcssResult: postcss.Result
+  postcssResult: stylelint.PostcssResult
 ) {
   return checkValueAgainstSubset(
     decl,
@@ -101,21 +98,21 @@ function checkValueAgainstSubset(
   message,
   value,
   subset,
-  postcssResult,
+  postcssResult: stylelint.PostcssResult,
   altProp?: string
 ) {
   if (typeof subset === 'function') {
     subset = subset(message.prop, message.value);
   }
   if (Array.isArray(subset)) {
-    let parsed = valueParser(value);
-    let words = parsed.nodes.filter(
+    const parsed = valueParser(value);
+    const words = parsed.nodes.filter(
       (node: ValueParserNode) => node.type === 'word'
     );
-    debugger;
+    
     console.log(words);
 
-    let valueNotInSubset = words.some((node: ValueParserNode) => {
+    const valueNotInSubset = words.some((node: ValueParserNode) => {
       return !subset.includes(node.value);
     });
     // debugger;
