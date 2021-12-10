@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/knownasilya/subsetcss/compare/v0.2.7...v0.3.0) (2021-12-10)
+
 ### [0.2.7](https://github.com/knownasilya/subsetcss/compare/v0.2.6...v0.2.7) (2021-12-10)
 
 
