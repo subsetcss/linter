@@ -1,0 +1,20 @@
+{
+  "name": "design-tokens",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "yarn stylelint '**/*.css'"
+  },
+  "author": "Ilya Radchenko",
+  "license": "ISC",
+  "devDependencies": {
+    "stylelint": "^14.1.0",
+    "stylelint-config-standard": "^24.0.0",
+    "subsetcss": "^0.3.0"
+  },
+  "volta": {
+    "node": "16.13.1",
+    "yarn": "1.22.17"
+  }
+}
